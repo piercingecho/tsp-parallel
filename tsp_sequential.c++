@@ -195,11 +195,12 @@ int compute_tsp_permutation(int* permutation, int** city_weights, int num_cities
 void report_tsp_solution(int* best_permute_array, int lowest_cost, int num_cities)
 {
     printf("===\n");
+    printf("0 ");
     for(int i=0; i<num_cities - 1; i++)
     {
         printf("%d ", best_permute_array[i]);
     }
-    printf("%d", lowest_cost);
+    printf("0 %d", lowest_cost);
     return;
 }
 
