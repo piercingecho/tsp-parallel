@@ -14,7 +14,7 @@ using namespace std;
 
 struct FileData read_tsp_file(char const* filename); // const* because string is literal
 void free_file_data(int** city_weights, int num_cities);
-int find_tsp_solution(int* best_permute_array,
+int find_tsp_solution_sequential(int* best_permute_array,
                     int* start_permute_array, 
                     int* end_permute_array, 
                     int** city_weights,
@@ -24,7 +24,7 @@ void report_tsp_solution(int* best_permute_array, int lowest_cost, int num_citie
 int int_array_equals(int* arrayone, int* arraytwo, int length);
 //:3 
 
-int main(void)
+int main_sequential(void)
 {
     // FileData's city weights is a malloc'd int array, free it later
     struct FileData file_data = read_tsp_file(FILE_NAME);
@@ -44,7 +44,7 @@ int main(void)
         best_permute_array[i] = i+1;
     }
 
-    int best_value = find_tsp_solution(best_permute_array, start_permute_array, end_permute_array, city_weights, num_cities);
+    int best_value = find_tsp_solution_sequential(best_permute_array, start_permute_array, end_permute_array, city_weights, num_cities);
 
     if(WORDY_OUTPUT)
     {
@@ -105,7 +105,7 @@ void free_file_data(int** city_weights, int num_cities)
     free(city_weights);
 }
 
-int find_tsp_solution(int* best_permute,
+int find_tsp_solution_sequential(int* best_permute,
                     int* start_permute, 
                     int* end_permute, 
                     int** city_weights,
@@ -163,6 +163,7 @@ int find_tsp_solution(int* best_permute,
             }
             printf("0 %d\n", curr_value);
         }
+
     
         next_permutation(curr_permute,curr_permute+(num_cities - 1));
 
@@ -200,7 +201,7 @@ void report_tsp_solution(int* best_permute_array, int lowest_cost, int num_citie
     {
         printf("%d ", best_permute_array[i]);
     }
-    printf("0 %d", lowest_cost);
+    printf("0: %d", lowest_cost);
     return;
 }
 
